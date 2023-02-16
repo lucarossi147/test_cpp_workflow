@@ -66,9 +66,9 @@ jobs:
           prerelease: true
           title: "Unix libraries"
           files: |
-            libprova.so
-            prova.o
-            prova.h
+            dist/libprova.so
+            dist/prova.o
+            dist/prova.h
 
   clean-up:
     name: "Clean up"
