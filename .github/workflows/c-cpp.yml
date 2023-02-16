@@ -59,6 +59,11 @@ jobs:
           name: bundles
           path: dist/
 
+      - name: Show downloaded files
+        run: |
+          cd dist
+          ls
+          
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
