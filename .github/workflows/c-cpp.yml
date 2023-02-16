@@ -7,13 +7,25 @@ on:
     branches: [ "main" ]
 
 jobs:
+  windows-build: 
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Install Qt
+      uses: jurplel/install-qt-action@v3.0.0
+      
+    - name: Enable Developer Command Prompt
+    - uses: ilammy/msvc-dev-cmd@v1.12.1
+    - name: build which needs cl.exe
+      run: |
+        cd prova
+        "{{$RUNNER_WORKSPACE}}\Qt\Qt5.15.2\5.15.2\win64_msvc2019_64\bin\qmake.exe" prova.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"
+        ls
+  
   build:
-    strategy:
-      matrix:
-        os: [ ubuntu-latest, windows-latest ]
-    runs-on: ${{ matrix.os }}
-    env:
-      working-directory: ./prova
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
@@ -29,17 +41,5 @@ jobs:
         make
         ls
         
-    - name: run qmake on windows
-      if: matrix.os == 'windows-latest'
-      run: |
-        cd prova
-#     - name: Enable Developer Command Prompt
-#     - uses: ilammy/msvc-dev-cmd@v1.12.1
-#     - name: build which needs cl.exe
-#       run: |
-#         cd prova
-#         "{{$RUNNER_WORKSPACE}}\Qt\Qt5.15.2\5.15.2\win64_msvc2019_64\bin\qmake.exe" prova.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"
-#         ls
-
         
 
