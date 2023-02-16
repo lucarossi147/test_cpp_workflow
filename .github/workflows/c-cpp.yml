@@ -18,3 +18,9 @@ jobs:
 
     - name: Install Qt
       uses: jurplel/install-qt-action@v3.0.0
+      
+    - name: run qmake
+      run: |
+        qmake -o Makefile prova.pro
+        make
+
