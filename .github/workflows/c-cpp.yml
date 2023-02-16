@@ -7,26 +7,22 @@ on:
     branches: [ "main" ]
 
 jobs:
-  windows-build: 
-    runs-on: windows-latest
+#   windows-build: 
+#     runs-on: windows-latest
     
-    steps:
-    - uses: actions/checkout@v3
+#     steps:
+#     - uses: actions/checkout@v3
 
-    - name: Install Qt
-      uses: jurplel/install-qt-action@v3.0.0
+#     - name: Install Qt
+#       uses: jurplel/install-qt-action@v3.0.0
       
-    - name: Enable Developer Command Prompt
-      uses: ilammy/msvc-dev-cmd@v1.12.1
-    - name: build which needs cl.exe
-      run: |
-        cd prova
-        cd {{$RUNNER_WORKSPACE}}\Qt\Qt5.15.2\5.15.2\win64_msvc2019_64\bin
-        dir
-        cd {{$RUNNER_WORKSPACE}}\prova
-        dir
-        "{{$RUNNER_WORKSPACE}}\Qt\Qt5.15.2\5.15.2\win64_msvc2019_64\bin\qmake.exe" prova.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"
-        ls
+#     - name: Enable Developer Command Prompt
+#       uses: ilammy/msvc-dev-cmd@v1.12.1
+#     - name: build which needs cl.exe
+#       run: |
+#         cd prova
+#         "{{$RUNNER_WORKSPACE}}\Qt\Qt5.15.2\5.15.2\win64_msvc2019_64\bin\qmake.exe" prova.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"
+#         ls
   
   build:
     runs-on: ubuntu-latest
@@ -43,6 +39,13 @@ jobs:
         qmake -o Makefile prova.pro
         make
         ls
+        
+    - uses: actions/upload-artifact@v3
+      with:
+        name: bundles
+        path: |
+          libprova.so
+          prova.o
         
         
 
