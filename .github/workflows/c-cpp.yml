@@ -44,9 +44,9 @@ jobs:
       with:
         name: bundles
         path: |
-          /prova/libprova.so
-          /prova/prova.o
-          /prova/prova.h
+          prova/libprova.so
+          prova/prova.o
+          prova/prova.h
         
         
 
