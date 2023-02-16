@@ -48,5 +48,36 @@ jobs:
           prova/prova.o
           prova/prova.h
         
+  pre-release:
+    name: "Pre Release"
+    needs: build
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: bundles
+          path: dist/
+
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Unix libraries"
+          files: |
+            libprova.so
+            prova.o
+            prova.h
+
+  clean-up:
+    name: "Clean up"
+    needs: pre-release
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - uses: geekyeggo/delete-artifact@v1
+        with:
+          name: bundles
         
 
