@@ -31,13 +31,15 @@ jobs:
         
     - name: run qmake on windows
       if: matrix.os == 'windows-latest'
+      run: |
+        cd prova
     - name: Enable Developer Command Prompt
     - uses: ilammy/msvc-dev-cmd@v1.12.1
-#     - name: build which needs cl.exe
-#       run: |
-#         cd prova
-#         "{{$RUNNER_WORKSPACE}}\Qt\Qt5.15.2\5.15.2\win64_msvc2019_64\bin\qmake.exe" prova.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"
-#         ls
+    - name: build which needs cl.exe
+      run: |
+        cd prova
+        "{{$RUNNER_WORKSPACE}}\Qt\Qt5.15.2\5.15.2\win64_msvc2019_64\bin\qmake.exe" prova.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"
+        ls
 
         
 
