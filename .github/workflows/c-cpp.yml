@@ -22,6 +22,7 @@ jobs:
     - name: run qmake
       run: |
         pwd
+        ls
         qmake -o Makefile prova.pro
         make
 
