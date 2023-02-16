@@ -23,6 +23,7 @@ jobs:
       run: |
         cd prova
         qmake -o Makefile prova.pro
+        cat Makefile
         make
         ls
 
