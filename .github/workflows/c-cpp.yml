@@ -21,6 +21,10 @@ jobs:
     - name: build which needs cl.exe
       run: |
         cd prova
+        cd {{$RUNNER_WORKSPACE}}\Qt\Qt5.15.2\5.15.2\win64_msvc2019_64\bin
+        dir
+        cd {{$RUNNER_WORKSPACE}}\prova
+        dir
         "{{$RUNNER_WORKSPACE}}\Qt\Qt5.15.2\5.15.2\win64_msvc2019_64\bin\qmake.exe" prova.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"
         ls
   
@@ -34,7 +38,6 @@ jobs:
       uses: jurplel/install-qt-action@v3.0.0
       
     - name: run qmake on ubuntu
-      if: matrix.os == 'ubuntu-latest'
       run: |
         cd prova
         qmake -o Makefile prova.pro
