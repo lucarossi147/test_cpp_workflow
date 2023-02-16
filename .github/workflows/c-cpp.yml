@@ -48,6 +48,7 @@ jobs:
   pre-release:
     name: "Pre Release"
     needs: build
+    permissions: write-all
     runs-on: "ubuntu-latest"
 
     steps:
